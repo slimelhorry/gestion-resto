@@ -1,0 +1,42 @@
+
+create database resto_db character set 'utf8';
+
+use resto_db;
+
+create table tb_table(
+num_tab smallint primary key,
+nb_place smallint not null,
+etat varchar(10) not null)
+engine=innodb;
+
+create table tb_commande(
+id_commande int auto_increment primary key,
+aliment varchar(50) not null,
+qte_aliment smallint not null,
+tab_num smallint not null)
+engine=innodb;
+
+create table tb_aliment(
+code_aliment varchar(50) primary key,
+nom_aliment varchar(100) not null,
+prix_aliment decimal(9,2) not null)
+engine=innodb;
+
+
+alter table tb_commande add constraint fk foreign key(aliment)
+references tb_aliment(code_aliment);
+
+alter table tb_commande add constraint fk2 foreign key(tab_num)
+references tb_table(num_tab); 
+
+create table tb_historique(
+id_commande int auto_increment primary key,
+aliment varchar(50) not null,
+qte_aliment smallint not null,
+tab_num smallint not null,
+date_commande datetime not null)
+engine=innodb;
+
+
+
+ 
